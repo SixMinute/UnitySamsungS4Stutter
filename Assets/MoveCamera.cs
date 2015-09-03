@@ -7,12 +7,14 @@ public class MoveCamera : MonoBehaviour {
 	public float _MinY;
 	private bool _DirUp;
 	private float _CurrentY;
+	private Vector3 _LocalVector;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		_CurrentY = _MaxY;
 		_DirUp = false;
+		_LocalVector = new Vector3();
 	}
 	
 	// Update is called once per frame
@@ -40,7 +42,9 @@ public class MoveCamera : MonoBehaviour {
 				_DirUp = true;
 			}
 		}
+
+		_LocalVector.Set(transform.position.x, _CurrentY, transform.position.z);
 		
-		transform.position = new Vector3(transform.position.x, _CurrentY, transform.position.z);
+		transform.position = _LocalVector;
 	}
 }
